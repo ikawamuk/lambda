@@ -1,0 +1,11 @@
+program = 1*line
+line = *ws [expr] *ws "\n"
+stmt = let_stmt / expr
+let_stmt = "let" 1*ws identifier *ws "=" *ws expr
+expr = abs / app
+abs = "\" *ws identifier *ws "." *ws expr
+app = primary *(1*ws primary)
+primary = identifier / ("(" *ws expr *ws ")")
+identifier = 1*char
+ws = " " / "\t"
+char = ALPHA / DIGIT
