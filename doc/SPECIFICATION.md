@@ -37,8 +37,8 @@ $ lambda [filename]
 ### 字句構文
 ```
 TOKENS		=	{ LEXEME | WS }
-LEXEME		=	LAMBDA | DOT | LPAREN | RPAREN | IDENTIFIER
-WS			=	" " | "\t"
+LEXEME		=	LAMBDA | DOT | LPAREN | RPAREN | IDENTIFIER | EOS
+WS			=	" " | "\t" | "\n"
 LAMBDA		=	"\"
 DOT			=	"."
 LPAREN		=	"("
@@ -48,6 +48,7 @@ IDENTIFIER	=	[a-zA-Z0-9_]+
 <!-- ```
 DEF			=	"def"
 ASSIGN		=	"="
+EOS			=	"\n"
 ``` -->
 
 ### 文脈自由構文
@@ -58,6 +59,6 @@ primary		=	IDENTIFIER | LPAREN expr RPAREN
 application	=	primary | application primary
 ```
 <!-- ```
-ast			=	{ definition } expr
+ast			=	{ definition EOS } [ expr ]
 definision	=	DEF IDENTIFIER ASSIGN expr
 ``` -->

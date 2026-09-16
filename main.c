@@ -1,8 +1,9 @@
 #include <stdio.h>
 #include "src/types.h"
+#include "src/string/String.h"
 
-int	lex(TokenList* token_list, const char *source_code);
-int	parse(ASTNode* ast_root, const TokenList *token_list);
+int	lex(TokenList *token_list, const String src_str);
+int	parse(ASTNode *ast_root, const TokenList *token_list);
 int	evaluate(ASTNode *value, const ASTNode *ast_root);
 int	encode(int *status, const ASTNode *value);
 
@@ -17,8 +18,12 @@ int	main(int argc, char *argv[]) {
 }
 
 static int	run_interpreter(const char *source_code) {
+	String		src_str;
+	if (string_construct(&src_str, source_code) < 0)
+		reutrn (-1);
 	TokenList	token_list;
-	if (lex(&token_list, source_code) < 0)
+	token_list_construct(&token_list);
+	if (lex(&token_list, src_str) < 0)
 		return (-1);
 	ASTNode		ast_root;
 	if (parse(&ast_root, &token_list) < 0)

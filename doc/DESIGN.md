@@ -10,7 +10,7 @@
 ## データ構造
 - ソースコード文字列: char*
 - トークン列
-	- TokenList: ( data: Token, next: TokenList* )
+	- TokenNode: ( data: Token, next: TokenNode* )
 		- Token: ( type: TokenType, literal: char* )
 			- TokenType: LAMBDA, DOT, LPAREN, RPAREN, IDENTIFIER
 - Expr, Value

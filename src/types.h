@@ -3,27 +3,7 @@
 
 # include <stddef.h>
 
-typedef struct TokenList	TokenList;
-typedef struct Token		Token;
-typedef enum TokenType		TokenType;
-
-struct TokenList {
-	Token		data;
-	TokenList	*next;
-};
-
-enum TokenType {
-	LAMBDA, // '\'
-	DOT,    // '.'
-	LPAREN, // '('
-	RPAREN, // ')'
-	IDENTIFIER
-};
-
-struct Token {
-	TokenType	type;
-	char		*literal;
-};
+# include "token_list/TokenList.h"
 
 typedef struct ASTNode	ASTNode;
 typedef enum ASTType	ASTType;
