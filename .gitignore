@@ -7,8 +7,8 @@
 !.gitignore
 !.gitkeep
 !main.c
-!src/**/*.c
-!include/*.h
+!*.c
+!*.h
 !doc/REQUIREMENTS.md
 !doc/SPECIFICATION.md
 !doc/DESIGN.md
