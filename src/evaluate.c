@@ -1,5 +1,6 @@
 #include "types.h"
-int	evaluate(ASTNode *value, const ASTNode *ast_root)
-{
-	return (0);
-}
+
+// int	evaluate(ASTNode *value, const ASTNode *ast_root)
+// {
+// 	return (0);
+// }

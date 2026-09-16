@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <ctype.h>
 #include <string.h>
+#include <stdlib.h>
 #include "types.h"
 
 void	skip_spaces(string_iterator *it);
@@ -10,12 +11,12 @@ static int	append_new_token(TokenList *token_list, string_iterator *it);
 static int	make_new_token(Token *new_token, string_iterator *it);
 static int	make_itentifier_token(Token *new_token, string_iterator *it);
 
-
 int	lex(TokenList *token_list, const String src_str)
 {
-	for (string_iterator it = string_begin(&src_str); it != string_end(&src_str); ++it) {
+	string_iterator it  = string_begin(&src_str);
+	while (*it != '\0') {
 		skip_spaces(&it);
-		if (it != string_end(&src_str))
+		if (*it == '\0')
 			break ;
 		if (append_new_token(token_list, &it) < 0)
 			return (-1);
@@ -42,19 +43,19 @@ static int	make_new_token(Token *new_token, string_iterator *it) {
 	char	top = **it;
 	switch (top) {
 		case '\\':
-			token_construct_c_str(new_token, LAMBDA, "\\");
+			token_construct_c_str(new_token, TK_LAMBDA, "\\");
 			break ;
 		case '.':
-			token_construct_c_str(new_token, DOT, ".");
+			token_construct_c_str(new_token, TK_DOT, ".");
 			break ;
 		case '(':
-			token_construct_c_str(new_token, LPAREN, "(");
+			token_construct_c_str(new_token, TK_LPAREN, "(");
 			break ;
 		case ')':
-			token_construct_c_str(new_token, RPAREN, ")");
+			token_construct_c_str(new_token, TK_RPAREN, ")");
 			break ;
 		default:
-			if (!isalnum(top)) {
+			if (!isalnum(top) && top != '_') {
 				fprintf(stderr, "Error: Unexpected charactor: '%c'\n", top);
 				return (-1);
 			}
@@ -66,12 +67,12 @@ static int	make_new_token(Token *new_token, string_iterator *it) {
 
 static int	make_itentifier_token(Token *new_token, string_iterator *it) {
 	string_iterator head = *it;
-	while (isalnum(**it))
+	while (isalnum(**it) || **it == '_')
 		++(*it);
 	char	*ident = strndup(head, *it - head);
 	if (!ident)
 		return (-1);
-	if (token_construct_c_str(new_token, IDENTIFIER, ident) < 0) {
+	if (token_construct_c_str(new_token, TK_IDENTIFIER, ident) < 0) {
 		free(ident);
 		return (-1);
 	}

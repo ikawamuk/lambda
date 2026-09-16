@@ -72,14 +72,14 @@ String  *string_assign(String *l, const String *r)
     return (l);
 }
 
-char    *string_begin(String *s)
+string_iterator	string_begin(const String *s)
 {
     if (!s) return (NULL);
     const String_impl_    *this = (const String_impl_*)s;
     return (this->data);
 }
 
-char    *string_end(String *s)
+string_iterator	string_end(const String *s)
 {
     if (!s) return (NULL);
     const String_impl_    *this = (const String_impl_*)s;

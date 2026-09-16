@@ -20,10 +20,10 @@ void    string_destruct(String *this);
 int     string_copy_construct(String *this, const String *other);
 String  *string_assign(String *lhs, const String *rhs);
 
-string_iterator	string_begin(String *this);
-string_iterator	string_end(String *this);
-// string_iterator	string_rbegin(const String *this);
-// string_iterator	string_rend(const String *this);
+string_iterator	string_begin(const String *this);
+string_iterator	string_end(const String *this);
+// string_iterator	string_rbegin(String *this);
+// string_iterator	string_rend(String *this);
 
 // size_t  string_size(const String *this);
 size_t  string_length(const String *this);

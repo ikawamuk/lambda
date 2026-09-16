@@ -9,9 +9,9 @@ typedef struct ASTNode	ASTNode;
 typedef enum ASTType	ASTType;
 
 enum ASTType {
-	ABSTRUCTION,
-	APPLICATION,
-	IDENTIFIER
+	AST_ABSTRUCTION,
+	AST_APPLICATION,
+	AST_IDENTIFIER
 };
 
 struct ASTNode {

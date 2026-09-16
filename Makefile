@@ -4,11 +4,12 @@ CC			=	cc
 RM			=	rm
 CFLAGS		=	-Wall -Wextra -Werror -I$(INCDIR)
 
-SRCS		=	main.c
+SRCS		=	main.c \
+				$(shell find $(SRCDIR) -type f -name "*.c")
 
-OBJS		= $(addprefix $(OBJDIR)/, $(notdir $(SRCS:.c=.o)))
+OBJS		=	$(patsubst %.c, $(OBJDIR)/%.o, $(SRCS))
 SRCDIR		=	src
-INCLUDES	=	include
+INCDIR		=	include
 OBJDIR		=	obj
 TESTDIR		=	test
 
@@ -17,11 +18,9 @@ all: $(NAME)
 $(NAME): $(OBJS)
 	$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
 
-$(OBJDIR)/%.o: %.c | $(OBJDIR)
+$(OBJDIR)/%.o: %.c
+	@mkdir -p $(dir $@)
 	$(CC) $(CFLAGS) -c $< -o $@
-
-$(OBJDIR):
-	mkdir -p $(OBJDIR)
 
 clean:
 	rm -rf $(OBJDIR)
