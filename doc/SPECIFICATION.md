@@ -52,7 +52,6 @@ ASSIGN		=	"="
 
 ### 文脈自由構文
 ```
-
 expr		=	abstruction | application
 abstruction	=	LAMBDA IDENTIFIER DOT expr
 primary		=	IDENTIFIER | LPAREN expr RPAREN
