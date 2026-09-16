@@ -1,6 +1,0 @@
-let TRUE = \x. \y. x
-let FALSE = \x. \y. y
-let AND = \p. \q. p q FALSE
-
-AND TRUE FALSE
-AND TRUE TRUE

@@ -1,0 +1,16 @@
+*
+!**/
+
+!README.md
+!Makefile
+
+!.gitignore
+!.gitkeep
+!main.c
+!src/**/*.c
+!include/*.h
+!doc/REQUIREMENTS.md
+!doc/SPECIFICATION.md
+!doc/DESIGN.md
+!test/run_test.sh
+!test/fixtures/*.lm
