@@ -53,8 +53,9 @@ EOS			=	"\n"
 
 ### 文脈自由構文
 ```
-expr		=	abstruction | application
-abstruction	=	LAMBDA IDENTIFIER DOT expr
+expr		=	abstraction | application
+abstraction	=	LAMBDA parameter DOT expr
+parameter	=	IDENTIFIER
 primary		=	IDENTIFIER | LPAREN expr RPAREN
 application	=	primary | application primary
 ```

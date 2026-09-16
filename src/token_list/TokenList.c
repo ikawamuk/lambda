@@ -44,6 +44,14 @@ void	token_list_print(const TokenList *this) {
 	}
 }
 
+TokenType	token_node_type(const TokenNode *this) {
+	return (this->data.type);
+}
+
+TokenNode	*token_node_next(const TokenNode *this) {
+	return (this->next);
+}
+
 int	token_construct_c_str(Token *this, TokenType type, char *c_str) {
 	this->type = type;
 	if (string_construct(&this->literal, c_str) < 0)

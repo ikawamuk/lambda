@@ -3,7 +3,7 @@
 #include "src/string/String.h"
 
 int	lex(TokenList *token_list, const String src_str);
-// int	parse(ASTNode *ast_root, const TokenList *token_list);
+int	parse(AST *ast_root, const TokenList *token_list);
 // int	evaluate(ASTNode *value, const ASTNode *ast_root);
 // int	encode(int *status, const ASTNode *value);
 
@@ -30,11 +30,15 @@ static int	run_interpreter(const char *source_code) {
 		token_list_destruct(&token_list);
 		return (-1);
 	}
-	token_list_print(&token_list);
+	token_list_print(&token_list); // 後で消す
 	string_destruct(&src_str);
-	// ASTNode		ast_root;
-	// if (parse(&ast_root, &token_list) < 0)
-	// 	return (-1);
+	AST	ast_root;
+	ast_construct(&ast_root);
+	if (parse(&ast_root, &token_list) < 0) {
+		token_list_destruct(&token_list);
+		return (-1);
+	}
+	token_list_destruct(&token_list);
 	// ASTNode		value;
 	// if (evaluate(&value, &ast_root) < 0)
 	// 	return (-1);

@@ -35,6 +35,9 @@ struct TokenNode {
 	TokenNode	*prev;
 };
 
+TokenType	token_node_type(const TokenNode *this);
+TokenNode	*token_node_next(const TokenNode *this);
+
 struct TokenList {
 	TokenNode	*head;
 	TokenNode	*tail;
