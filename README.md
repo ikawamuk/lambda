@@ -1,1 +1,1 @@
-# lamda
+# lambda

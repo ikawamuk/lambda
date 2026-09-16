@@ -1,3 +1,3 @@
-# lamda design
+# lambda design
 
 

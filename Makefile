@@ -1,4 +1,4 @@
-NAME		=	lamda
+NAME		=	lambda
 TESTNAME	=	run_test.sh
 CC			=	cc
 RM			=	rm

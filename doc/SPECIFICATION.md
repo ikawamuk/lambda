@@ -1,11 +1,11 @@
-# lamda specification
+# lambda specification
 ## CLI仕様
 - コマンド
 ```
-$ lamda expr
+$ lambda expr
 ```
 <!-- ```
-$ lamda [filename]
+$ lambda [filename]
 ``` -->
 <!-- - オプション
 	- **ヘルプ(`help`)**: ヘルプを標準出力に表示する
@@ -26,3 +26,23 @@ $ lamda [filename]
 - **`.exit`, `.quit`**: REPLセッションを終了する
 - **`.env`**: 現在の環境にバインドされている変数・定義の一覧を表示する。
 - **`.help`**: 利用可能なメタコマンド一覧を表示する。 -->
+
+## 言語仕様
+- 以下EBNFを記載する。
+```
+LAMBDA		=	'\'
+DOT			=	'.'
+IDENTIFIER	=	[a-zA-Z0-9_]+
+```
+<!-- ```
+/* --- Lexical Tokens --- */
+WS			=	' ' | '\t'
+NEW_LINE	=	'\n' | '\r\n'
+LAMBDA		=	'\'
+DOT			=	'.'
+LPAREN		=	'('
+RPAREN		=	')'
+IDENTIFIER	=	[a-zA-Z0-9_]+
+DEF			=	'def'
+ASSIGN		=	'='
+``` -->

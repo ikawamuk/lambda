@@ -1,4 +1,4 @@
-# lamda requirements
+# lambda requirements
 ## 概要と目的
 - ラムダ計算の実装を行う学習用プロジェクト
 
