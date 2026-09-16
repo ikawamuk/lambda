@@ -28,21 +28,37 @@ $ lambda [filename]
 - **`.help`**: 利用可能なメタコマンド一覧を表示する。 -->
 
 ## 言語仕様
-- 以下EBNFを記載する。
+### 表記規則
+以下の表記規則を使用する
+- 正規表現
+- **パターン1 | パターン2**: 選択
+- **{ パターン }**: 0回以上の繰り返し
+
+### 字句構文
 ```
-LAMBDA		=	'\'
-DOT			=	'.'
+TOKENS		=	{ LEXEME | WS }
+LEXEME		=	LAMBDA | DOT | LPAREN | RPAREN | IDENTIFIER
+WS			=	" " | "\t"
+LAMBDA		=	"\"
+DOT			=	"."
+LPAREN		=	"("
+RPAREN		=	")"
 IDENTIFIER	=	[a-zA-Z0-9_]+
 ```
 <!-- ```
-/* --- Lexical Tokens --- */
-WS			=	' ' | '\t'
-NEW_LINE	=	'\n' | '\r\n'
-LAMBDA		=	'\'
-DOT			=	'.'
-LPAREN		=	'('
-RPAREN		=	')'
-IDENTIFIER	=	[a-zA-Z0-9_]+
-DEF			=	'def'
-ASSIGN		=	'='
+DEF			=	"def"
+ASSIGN		=	"="
+``` -->
+
+### 文脈自由構文
+```
+
+expr		=	abstruction | application
+abstruction	=	LAMBDA IDENTIFIER DOT expr
+primary		=	IDENTIFIER | LPAREN expr RPAREN
+application	=	primary | application primary
+```
+<!-- ```
+ast			=	{ definition } expr
+definision	=	DEF IDENTIFIER ASSIGN expr
 ``` -->
