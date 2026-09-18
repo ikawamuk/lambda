@@ -11,8 +11,11 @@ int	parse_application(AST *ast, ParseState *parse_state) {
 	if (parse_primary(&left, parse_state) < 0)
 		return (-1);
 	while (1) {
-		if (parse_primary(&right, parse_state) < 0) {
+		if (peek_type(parse_state) == TK_EOF)
 			break ;
+		if (parse_primary(&right, parse_state) < 0) {
+			ast_destruct(&left);
+			return (-1);
 		}
 		Application	app = {0};
 		ast_move(&app.function, &left);

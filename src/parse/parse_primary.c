@@ -3,6 +3,7 @@
 #include "parse.h"
 
 int	parse_expr(AST *ast, ParseState *parse_state);
+int	case_abstraction(AST *ast, ParseState *parse_state);
 
 static int	case_identifier(AST *ast, ParseState *parse_state);
 static int	case_paren(AST *ast, ParseState *parse_state);
@@ -11,6 +12,7 @@ int	parse_primary(AST *ast, ParseState *parse_state) {
 	switch (peek_type(parse_state)) {
 		case TK_IDENTIFIER: return (case_identifier(ast, parse_state));
 		case TK_LPAREN: return (case_paren(ast, parse_state));
+		case TK_LAMBDA: return (case_abstraction(ast, parse_state));
 		default: return (-1);
 	}
 }

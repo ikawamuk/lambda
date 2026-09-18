@@ -1,6 +1,6 @@
 #define _GNU_SOURCE
 #include <stdio.h>
-#include <ctype.h>
+#include <stdbool.h>
 #include <string.h>
 #include <stdlib.h>
 #include "types.h"
@@ -11,6 +11,8 @@ static int	append_new_token(TokenList *token_list, string_iterator *it);
 static int	make_new_token(Token *new_token, string_iterator *it);
 static int	make_itentifier_token(Token *new_token, string_iterator *it);
 static int	append_eof_token(TokenList *token_list);
+static bool is_identifier_char(char c);
+
 
 int	lex(TokenList *token_list, const String src_str)
 {
@@ -73,7 +75,7 @@ static int	make_new_token(Token *new_token, string_iterator *it) {
 			token_construct_c_str(new_token, TK_RPAREN, ")");
 			break ;
 		default:
-			if (!isalnum(top) && top != '_') {
+			if (!is_identifier_char(top) && top != '_') {
 				fprintf(stderr, "Error: Unexpected charactor: '%c'\n", top);
 				return (-1);
 			}
@@ -85,7 +87,7 @@ static int	make_new_token(Token *new_token, string_iterator *it) {
 
 static int	make_itentifier_token(Token *new_token, string_iterator *it) {
 	string_iterator head = *it;
-	while (isalnum(**it) || **it == '_')
+	while (is_identifier_char(**it))
 		++(*it);
 	char	*ident = strndup(head, *it - head);
 	if (!ident)
@@ -96,4 +98,12 @@ static int	make_itentifier_token(Token *new_token, string_iterator *it) {
 	}
 	free(ident);
 	return (0);
+}
+
+static bool is_identifier_char(char c) {
+	if (c <= ' ' || c > '~') // WS または 制御文字
+		return (false);
+	if (c == '\\' || c == '.' || c == '(' || c == ')') // 構文記号
+		return (false);
+	return (true);
 }

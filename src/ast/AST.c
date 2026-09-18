@@ -65,14 +65,18 @@ static void	ast_print(AST *this) {
 	if (this->data->type == AST_VARIABLE)
 		printf("%s", string_c_str(&this->data->variable.name));
 	else if (this->data->type == AST_ABSTRUCTION) {
+		printf("(");
 		printf("\\%s", string_c_str(&this->data->abstruction.parameter));
 		printf(".");
 		ast_print(&this->data->abstruction.body);
+		printf(")");
 	}
 	else if (this->data->type == AST_APPLICATION) {
+		printf("(");
 		ast_print(&this->data->application.function);
 		printf(" ");
 		ast_print(&this->data->application.argument);
+		printf(")");
 	}
 }
 

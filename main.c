@@ -20,7 +20,7 @@ int	main(int argc, char *argv[]) {
 }
 
 static int	run_interpreter(const char *source_code) {
-	String		src_str = {0};
+	String	src_str = {0};
 	if (string_construct(&src_str, source_code) < 0)
 		return (-1);
 	TokenList	token_list = {0};
@@ -37,7 +37,7 @@ static int	run_interpreter(const char *source_code) {
 	}
 	token_list_destruct(&token_list);
 	ast_print_root(&ast_root);
-	// ASTNode		value;
+	// AST	value;
 	// if (evaluate(&value, &ast_root) < 0)
 	// 	return (-1);
 	// int	status;

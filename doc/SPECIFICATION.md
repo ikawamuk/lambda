@@ -33,6 +33,8 @@ $ lambda [filename]
 - 正規表現
 - **パターン1 | パターン2**: 選択
 - **{ パターン }**: 0回以上の繰り返し
+- **( パターン )**: グループ化
+- **パターン1 - パターン2**: パターン1からパターン2を除外したもの
 
 ### 字句構文
 ```
@@ -43,8 +45,9 @@ LAMBDA		=	"\"
 DOT			=	"."
 LPAREN		=	"("
 RPAREN		=	")"
-IDENTIFIER	=	CHAR {CHAR}
-CHAR		=	
+IDENTIFIER	=	CHAR+
+CHAR		=	PRINTABLE - ( LAMBDA | DOT | LPAREN | RPAREN )
+PRINTABLE	=	[\x21-\x7E]
 ```
 <!-- ```
 DEF			=	"def"
@@ -55,10 +58,9 @@ EOS			=	"\n"
 ### 文脈自由構文
 ```
 expr		=	abstraction | application
-abstraction	=	LAMBDA parameter DOT expr
-parameter	=	IDENTIFIER
+abstraction	=	LAMBDA IDENTIFIER DOT expr
 primary		=	IDENTIFIER | LPAREN expr RPAREN
-application	=	primary | application primary
+application	=	primary | application ( primary | abstraction)
 ```
 <!-- ```
 ast			=	{ definition EOS } [ expr ]
