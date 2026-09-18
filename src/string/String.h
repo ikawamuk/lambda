@@ -6,9 +6,7 @@
 
 typedef union String
 {
-    unsigned char   _[24];
-    void            *_align_p;
-    size_t          _align_s;
+	size_t	_[3];
 }   String;
 
 typedef char*	string_iterator;
@@ -71,5 +69,6 @@ int     string_print(int fd, String *this);
 // int     string_getline(String *dst, int fd);
 
 int     string_swap(String *lhs, String *rhs);
+int     string_move(String *dst, String *src);
 
 # endif

@@ -4,6 +4,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 
+_Static_assert(sizeof(void*) == sizeof(size_t));
 _Static_assert(sizeof(String) == sizeof(String_impl_),
                "String buffer is not equal to String_impl_");
 _Static_assert(_Alignof(String) >= _Alignof(String_impl_),
@@ -342,6 +343,18 @@ int     string_swap(String *l, String *r)
 
     *lhs = *rhs;
     *rhs = tmp;
+    return (0);
+}
+
+int     string_move(String *d, String *s)
+{
+    if (!s) return (-1);
+    String_impl_    *src = (String_impl_*)s;
+
+    *d = *s;
+    src->data = NULL;
+    src->length = 0;
+    src->capacity = 0;
     return (0);
 }
 
