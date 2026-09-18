@@ -4,7 +4,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-_Static_assert(sizeof(void*) == sizeof(size_t));
+_Static_assert(sizeof(void*) == sizeof(size_t), "");
 _Static_assert(sizeof(String) == sizeof(String_impl_),
                "String buffer is not equal to String_impl_");
 _Static_assert(_Alignof(String) >= _Alignof(String_impl_),

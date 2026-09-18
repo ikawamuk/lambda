@@ -1,12 +1,11 @@
-#include "token_list/TokenList.h"
-#include "ast/AST.h"
+#include "../token_list/TokenList.h"
+#include "../ast/AST.h"
 #include "parse.h"
 
 int	parse_abstraction(Abstruction *abstruction, ParseState *parse_state);
-int	parse_application(Application *application, ParseState *parse_state);
+int	parse_application(AST *ast, ParseState *parse_state);
 
 static int	case_abstraction(AST *ast, ParseState *parse_state);
-static int	case_application(AST *ast, ParseState *parse_state);
 
 int	parse_expr(AST *ast, ParseState *parse_state) {
 	switch (peek_type(parse_state)) {

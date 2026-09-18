@@ -1,6 +1,6 @@
 #include <stdlib.h>
-#include "token_list/TokenList.h"
-#include "ast/AST.h"
+#include "../token_list/TokenList.h"
+#include "../ast/AST.h"
 #include "parse.h"
 
 int	parse_primary(AST *ast, ParseState *parse_state);

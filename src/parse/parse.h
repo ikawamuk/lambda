@@ -1,7 +1,7 @@
 #ifndef PARSE_H
 # define PARSE_H
 
-#include "token_list/TokenList.h";
+#include "../token_list/TokenList.h"
 
 typedef struct ParseState {
 	const TokenList	*list_ptr;
@@ -9,5 +9,6 @@ typedef struct ParseState {
 }	ParseState;
 
 TokenType	peek_type(ParseState *this);
+void		consume(ParseState *this);
 
 #endif

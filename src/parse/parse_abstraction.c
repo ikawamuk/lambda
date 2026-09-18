@@ -1,8 +1,8 @@
-#include "token_list/TokenList.h"
-#include "ast/AST.h"
+#include "../token_list/TokenList.h"
+#include "../ast/AST.h"
 #include "parse.h"
 
-int	parse_expr(ASTNode **ast, ParseState *parse_state);
+int	parse_expr(AST *ast, ParseState *parse_state);
 
 static int	skip_lambda(ParseState *parse_state);
 static int	parse_parmeter(String *parameter, ParseState *parse_state);

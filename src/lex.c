@@ -10,6 +10,7 @@ void	skip_spaces(string_iterator *it);
 static int	append_new_token(TokenList *token_list, string_iterator *it);
 static int	make_new_token(Token *new_token, string_iterator *it);
 static int	make_itentifier_token(Token *new_token, string_iterator *it);
+static int	append_eof_token(TokenList *token_list);
 
 int	lex(TokenList *token_list, const String src_str)
 {

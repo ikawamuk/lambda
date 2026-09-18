@@ -1,5 +1,5 @@
-#include "token_list/TokenList.h"
-#include "ast/AST.h"
+#include "../token_list/TokenList.h"
+#include "../ast/AST.h"
 #include "parse.h"
 
 int	parse_expr(AST *ast, ParseState *parse_state);

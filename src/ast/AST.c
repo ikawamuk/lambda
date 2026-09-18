@@ -1,8 +1,12 @@
 #define _GNU_SOURCE
 #include <string.h>
+#include <stdio.h>
+#include <stdlib.h>
 #include "../string/String.h"
-#include "token_list/TokenList.h"
+#include "../token_list/TokenList.h"
 #include "AST.h"
+
+static void	ast_node_destruct(ASTNode *this);
 
 void	ast_construct(AST *this) {
 	this->data = NULL;
@@ -24,7 +28,7 @@ int	ast_move(AST *dest, AST *src) {
 int	ast_append_abstraction(AST *this, Abstruction *abstruction) {
 	ASTNode	*node = calloc(1, sizeof(ASTNode));
 	if (!node)
-		retur (-1);
+		return (-1);
 	node->type = AST_ABSTRUCTION;
 	if (abstruction_move(&node->abstruction, abstruction) < 0) {
 		free(node);
@@ -37,9 +41,9 @@ int	ast_append_abstraction(AST *this, Abstruction *abstruction) {
 int	ast_append_application(AST *this, Application *application) {
 	ASTNode	*node = calloc(1, sizeof(ASTNode));
 	if (!node)
-		retur (-1);
+		return (-1);
 	node->type = AST_APPLICATION;
-	if (application_move(&node->abstruction, application) < 0) {
+	if (application_move(&node->application, application) < 0) {
 		free(node);
 		return (-1);
 	}
@@ -50,14 +54,32 @@ int	ast_append_application(AST *this, Application *application) {
 int	ast_append_variable(AST *this, String *variable) {
 	ASTNode	*node = calloc(1, sizeof(ASTNode));
 	if (!node)
-		retur (-1);
-	node->type = AST_VARIABLE;
-	if (string_move(&node->variable, variable) < 0) {
-		free(node);
 		return (-1);
-	}
+	node->type = AST_VARIABLE;
+	variable_move_string(&node->variable, variable);
 	this->data = node;
 	return (0);
+}
+
+static void	ast_print(AST *this) {
+	if (this->data->type == AST_VARIABLE)
+		printf("%s", string_c_str(&this->data->variable.name));
+	else if (this->data->type == AST_ABSTRUCTION) {
+		printf("\\%s", string_c_str(&this->data->abstruction.parameter));
+		printf(".");
+		ast_print(&this->data->abstruction.body);
+	}
+	else if (this->data->type == AST_APPLICATION) {
+		ast_print(&this->data->application.function);
+		printf(" ");
+		ast_print(&this->data->application.argument);
+	}
+}
+
+void	ast_print_root(AST *this) {
+	printf("expr: ");
+	ast_print(this);
+	printf("\n");
 }
 
 static void	ast_node_destruct(ASTNode *this) {
@@ -80,7 +102,7 @@ static void	ast_node_destruct(ASTNode *this) {
 int	abstruction_move(Abstruction *dest, Abstruction *src) {
 	if (!dest || !src)
 		return (-1);
-	string_move(&dest->body, &src->body);
+	string_move(&dest->parameter, &src->parameter);
 	ast_move(&dest->body, &src->body);
 	return (0);
 }
@@ -100,6 +122,10 @@ int	application_move(Application *dest, Application *src) {
 void	application_destruct(Application *this) {
 	ast_destruct(&this->function);
 	ast_destruct(&this->argument);
+}
+
+void	variable_move_string(Variable *dest, String *src) {
+	string_move(&dest->name, src);
 }
 
 void	variable_destruct(Variable *this) {

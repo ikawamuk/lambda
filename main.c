@@ -36,6 +36,7 @@ static int	run_interpreter(const char *source_code) {
 		return (-1);
 	}
 	token_list_destruct(&token_list);
+	ast_print_root(&ast_root);
 	// ASTNode		value;
 	// if (evaluate(&value, &ast_root) < 0)
 	// 	return (-1);

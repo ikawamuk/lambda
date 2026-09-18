@@ -8,15 +8,21 @@ typedef struct AST		AST;
 typedef struct ASTNode	ASTNode;
 typedef enum ASTType	ASTType;
 
-enum ASTType {
-	AST_ABSTRUCTION,
-	AST_APPLICATION,
-	AST_VARIABLE
-};
-
 typedef struct Abstruction	Abstruction;
 typedef struct Application	Application;
 typedef struct Variable		Variable;
+
+struct AST {
+	ASTNode	*data;
+};
+
+void	ast_construct(AST *this);
+int		ast_move(AST *dest, AST *src);
+void	ast_destruct(AST *this);
+int		ast_append_abstraction(AST *this, Abstruction *abstruction);
+int		ast_append_application(AST *this, Application *application);
+int		ast_append_variable(AST *this, String *variable);
+void	ast_print_root(AST *this);
 
 struct Abstruction {
 	String	parameter;
@@ -40,6 +46,13 @@ struct Variable {
 };
 
 void	variable_destruct(Variable *this);
+void	variable_move_string(Variable *dest, String *src);
+
+enum ASTType {
+	AST_ABSTRUCTION,
+	AST_APPLICATION,
+	AST_VARIABLE
+};
 
 struct ASTNode {
 	ASTType	type;
@@ -50,14 +63,4 @@ struct ASTNode {
 	};
 };
 
-struct AST {
-	ASTNode	*data;
-};
-
-void	ast_construct(AST *this);
-int		ast_move(AST *dest, AST *src);
-void	ast_destruct(AST *this);
-int		ast_append_abstraction(AST *this, Abstruction *abstruction);
-int		ast_append_application(AST *this, Application *application);
-int		ast_append_variable(AST *this, String *variable);
 #endif
