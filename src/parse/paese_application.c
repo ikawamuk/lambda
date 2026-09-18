@@ -11,7 +11,7 @@ int	parse_application(AST *ast, ParseState *parse_state) {
 	if (parse_primary(&left, parse_state) < 0)
 		return (-1);
 	while (1) {
-		if (peek_type(parse_state) == TK_EOF)
+		if (peek_type(parse_state) == TK_EOF || peek_type(parse_state) == TK_RPAREN)
 			break ;
 		if (parse_primary(&right, parse_state) < 0) {
 			ast_destruct(&left);
