@@ -1,4 +1,6 @@
 # lambda
+ラムダ計算インタプリタの実装
+
 ## ドキュメント
 - [要件定義書](doc/REQUIREMENTS.md)
 - [外部仕様書](doc/SPECIFICATION.md)
