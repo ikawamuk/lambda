@@ -46,7 +46,7 @@ DOT			=	"."
 LPAREN		=	"("
 RPAREN		=	")"
 IDENTIFIER	=	CHAR+
-CHAR		=	PRINTABLE - ( LAMBDA | DOT | LPAREN | RPAREN )
+CHAR		=	PRINTABLE - ( LAMBDA | DOT | LPAREN | RPAREN | WS )
 PRINTABLE	=	[\x21-\x7E]
 ```
 <!-- ```
