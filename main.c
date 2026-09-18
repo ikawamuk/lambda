@@ -20,20 +20,17 @@ int	main(int argc, char *argv[]) {
 }
 
 static int	run_interpreter(const char *source_code) {
-	String		src_str;
+	String		src_str = {0};
 	if (string_construct(&src_str, source_code) < 0)
 		return (-1);
-	TokenList	token_list;
-	token_list_construct(&token_list);
+	TokenList	token_list = {0};
 	if (lex(&token_list, src_str) < 0) {
 		string_destruct(&src_str);
-		token_list_destruct(&token_list);
 		return (-1);
 	}
-	token_list_print(&token_list); // 後で消す
 	string_destruct(&src_str);
-	AST	ast_root;
-	ast_construct(&ast_root);
+	token_list_print(&token_list); // 後で消す
+	AST	ast_root = {0};
 	if (parse(&ast_root, &token_list) < 0) {
 		token_list_destruct(&token_list);
 		return (-1);

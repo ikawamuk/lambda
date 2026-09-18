@@ -45,11 +45,11 @@ void	token_list_print(const TokenList *this) {
 }
 
 TokenType	token_node_type(const TokenNode *this) {
-	return (this->data.type);
+	return (token_type(&this->data));
 }
 
-TokenNode	*token_node_next(const TokenNode *this) {
-	return (this->next);
+int	token_node_move_literal(TokenNode *this, String *dest) {
+	return (token_move_literal(&this->data, dest));
 }
 
 int	token_construct_c_str(Token *this, TokenType type, char *c_str) {
@@ -76,8 +76,15 @@ Token	*token_assign(Token *this, const Token *rhs) {
 	return (this);
 }
 
-void	token_destruct(Token *this)
-{
+TokenType	token_type(const Token *this) {
+	return (this->type);
+}
+
+int	token_move_literal(Token *this, String *dest) {
+	return (string_move(dest, &this->literal));
+}
+
+void	token_destruct(Token *this) {
 	string_destruct(&this->literal);
 }
 

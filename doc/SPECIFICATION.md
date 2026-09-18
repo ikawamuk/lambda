@@ -43,7 +43,8 @@ LAMBDA		=	"\"
 DOT			=	"."
 LPAREN		=	"("
 RPAREN		=	")"
-IDENTIFIER	=	[a-zA-Z0-9_]+
+IDENTIFIER	=	CHAR {CHAR}
+CHAR		=	
 ```
 <!-- ```
 DEF			=	"def"

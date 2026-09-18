@@ -18,8 +18,25 @@ int	lex(TokenList *token_list, const String src_str)
 		skip_spaces(&it);
 		if (*it == '\0')
 			break ;
-		if (append_new_token(token_list, &it) < 0)
+		if (append_new_token(token_list, &it) < 0) {
+			token_list_destruct(token_list);
 			return (-1);
+		}
+	}
+	if (append_eof_token(token_list) < 0) {
+		token_list_destruct(token_list);
+		return (-1);
+	}
+	return (0);
+}
+
+static int	append_eof_token(TokenList *token_list) {
+	Token	eof_token;
+	if (token_construct_c_str(&eof_token, TK_EOF, "") < 0)
+		return (-1);
+	if (token_list_push_back(token_list, &eof_token) < 0) {
+		token_destruct(&eof_token);
+		return (-1);
 	}
 	return (0);
 }

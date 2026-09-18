@@ -14,7 +14,8 @@ enum TokenType {
 	TK_DOT,    // '.'
 	TK_LPAREN, // '('
 	TK_RPAREN, // ')'
-	TK_IDENTIFIER
+	TK_IDENTIFIER,
+	TK_EOF
 };
 
 struct Token {
@@ -22,11 +23,13 @@ struct Token {
 	String		literal;
 };
 
-int		token_construct(Token *this, TokenType type, String literal);
-int		token_construct_c_str(Token *this, TokenType type, char *c_str);
-void	token_destruct(Token *this);
-Token	*token_assign(Token *this, const Token *rhs);
-void	token_print(const Token *this);
+int			token_construct(Token *this, TokenType type, String literal);
+int			token_construct_c_str(Token *this, TokenType type, char *c_str);
+void		token_destruct(Token *this);
+Token		*token_assign(Token *this, const Token *rhs);
+TokenType	token_type(const Token *this);
+int			token_move_literal(Token *this, String *dest);
+void		token_print(const Token *this);
 
 
 struct TokenNode {
@@ -36,7 +39,7 @@ struct TokenNode {
 };
 
 TokenType	token_node_type(const TokenNode *this);
-TokenNode	*token_node_next(const TokenNode *this);
+int			token_node_move_literal(TokenNode *this, String *dest);
 
 struct TokenList {
 	TokenNode	*head;
