@@ -348,7 +348,7 @@ int     string_swap(String *l, String *r)
 
 int     string_move(String *d, String *s)
 {
-    if (!s) return (-1);
+    if (!d || !s) return (-1);
     String_impl_    *src = (String_impl_*)s;
 
     *d = *s;
